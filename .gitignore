@@ -1,3 +1,5 @@
 *.env
 GATEWAY_ADMIN_PASSWORD
 telegraf.conf
+*.key
+*.pem

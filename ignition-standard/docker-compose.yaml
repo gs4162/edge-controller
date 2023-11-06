@@ -1,0 +1,29 @@
+version: '3.1'
+services:
+  gateway_standard:
+    image: mhm-edge-gateway-standard
+    networks:
+      - mhm_network
+    ports:
+      - 8088:8088
+      - 8044:8043
+    volumes:
+      - mhm-edge-gateway-standard:/usr/local/bin/ignition/data
+    environment:
+      - ACCEPT_IGNITION_EULA=Y
+      - GATEWAY_ADMIN_USERNAME=mhm
+      - GATEWAY_ADMIN_PASSWORD_FILE=/run/secrets/gateway-admin-password
+      - IGNITION_EDITION=standard
+      - TZ=Pacific/Auckland 
+    secrets:
+      - gateway-admin-password
+    command: "-n mhm-edge-gateway-standard"
+secrets:
+  gateway-admin-password:
+    file: /opt/ignition-standard/secrets/GATEWAY_ADMIN_PASSWORD
+volumes:
+  mhm-edge-gateway-standard:
+
+networks:
+  mhm_network:
+    external: true

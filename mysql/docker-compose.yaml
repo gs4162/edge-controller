@@ -1,0 +1,43 @@
+version: '3.1'
+services:
+  db:
+    image: mysql:5.7
+    networks:
+      - mhm_network
+    restart: always
+    environment:
+      MYSQL_DATABASE: '${MYSQL_DATABASE}'
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+    ports:
+      # <Port exposed> : <MySQL Port running inside container>
+      - '3306:3306'
+    expose:
+      # Opens port 3306 on the container
+      - '3306'
+      # Where our data will be persisted
+    volumes:
+      - my-db:/var/lib/mysql
+  
+  adminer:
+    image: adminer
+    networks:
+      - mhm_network
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  my-db:
+
+networks:
+  mhm_network:
+    external: true
+
+
+## make a .env
+#MYSQL_DATABASE=db
+#MYSQL_USER=ignition
+#MYSQL_PASSWORD=
+#MYSQL_ROOT_PASSWORD=
