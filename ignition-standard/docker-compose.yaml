@@ -20,7 +20,7 @@ services:
     command: "-n mhm-edge-gateway-standard"
 secrets:
   gateway-admin-password:
-    file: /opt/ignition-standard/secrets/GATEWAY_ADMIN_PASSWORD
+    file: /opt/ignition-standard-master/secrets/GATEWAY_ADMIN_PASSWORD
 volumes:
   mhm-edge-gateway-standard:
 
